@@ -24,24 +24,24 @@ resource "azurerm_virtual_network" "tfdemo_network" {
   location            = azurerm_resource_group.tfdemo_resource_group.location
   resource_group_name = azurerm_resource_group.tfdemo_resource_group.name
   address_space       = ["10.0.0.0/16"]
-  
+
   tags = { environment = "demo", build = "tfdemo" }
 }
 
 # Create a public subnet
 resource "azurerm_subnet" "tfdemo_public_subnet" {
-  name                      = "tfdemo_public_subnet"
-  address_prefixes          = ["10.0.1.0/24"]
-  resource_group_name       = azurerm_resource_group.tfdemo_resource_group.name
-  virtual_network_name      = azurerm_virtual_network.tfdemo_network.name
+  name                 = "tfdemo_public_subnet"
+  address_prefixes     = ["10.0.1.0/24"]
+  resource_group_name  = azurerm_resource_group.tfdemo_resource_group.name
+  virtual_network_name = azurerm_virtual_network.tfdemo_network.name
 }
 
 # Create a private subnet
 resource "azurerm_subnet" "tfdemo_private_subnet" {
-  name                      = "tfdemo_private_subnet"
-  address_prefixes          = ["10.0.2.0/24"]
-  resource_group_name       = azurerm_resource_group.tfdemo_resource_group.name
-  virtual_network_name      = azurerm_virtual_network.tfdemo_network.name
+  name                 = "tfdemo_private_subnet"
+  address_prefixes     = ["10.0.2.0/24"]
+  resource_group_name  = azurerm_resource_group.tfdemo_resource_group.name
+  virtual_network_name = azurerm_virtual_network.tfdemo_network.name
 }
 
 # Create a security group for the public subnet to allow port 80 traffic
@@ -73,14 +73,14 @@ resource "azurerm_subnet_network_security_group_association" "tfdemo_public_sg_a
 
 # Create a network interface for the server
 resource "azurerm_network_interface" "tfdemo_network_interface_web01" {
-  name                      = "tfdemo_network_interface_web01"
-  location                  = azurerm_resource_group.tfdemo_resource_group.location
-  resource_group_name       = azurerm_resource_group.tfdemo_resource_group.name
+  name                = "tfdemo_network_interface_web01"
+  location            = azurerm_resource_group.tfdemo_resource_group.location
+  resource_group_name = azurerm_resource_group.tfdemo_resource_group.name
 
   ip_configuration {
-    name                                    = "tfdemo_ip_configuration_web01"
-    subnet_id                               = azurerm_subnet.tfdemo_public_subnet.id
-    private_ip_address_allocation           = "dynamic"
+    name                          = "tfdemo_ip_configuration_web01"
+    subnet_id                     = azurerm_subnet.tfdemo_public_subnet.id
+    private_ip_address_allocation = "dynamic"
   }
 
   tags = { environment = "demo", build = "tfdemo" }
