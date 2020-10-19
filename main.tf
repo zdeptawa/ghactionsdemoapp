@@ -5,6 +5,22 @@
 
 # IMPORTANT: Make sure subscription_id, client_id, client_secret, and tenant_id are configured!
 
+terraform {
+  required_providers {
+    azurerm = {
+      source = "hashicorp/aazurerm"
+    }
+  }
+
+  backend "remote" {
+    organization = "zdeptawa"
+
+    workspaces {
+      name = "ghactionsdemoapp"
+    }
+  }
+}
+
 # Configure the Azure Provider
 provider "azurerm" {
   features {}
