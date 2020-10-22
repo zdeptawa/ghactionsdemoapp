@@ -2,14 +2,14 @@
 
 # Create a network interface for the server
 resource "azurerm_network_interface" "tfdemo_network_interface_web02" {
-  name                      = "tfdemo_network_interface_web02"
-  location                  = azurerm_resource_group.tfdemo_resource_group.location
-  resource_group_name       = azurerm_resource_group.tfdemo_resource_group.name
+  name                = "tfdemo_network_interface_web02"
+  location            = azurerm_resource_group.tfdemo_resource_group.location
+  resource_group_name = azurerm_resource_group.tfdemo_resource_group.name
 
   ip_configuration {
-    name                                    = "tfdemo_ip_configuration_web02"
-    subnet_id                               = azurerm_subnet.tfdemo_public_subnet.id
-    private_ip_address_allocation           = "dynamic"
+    name                          = "tfdemo_ip_configuration_web02"
+    subnet_id                     = azurerm_subnet.tfdemo_public_subnet.id
+    private_ip_address_allocation = "dynamic"
   }
 
   tags = { environment = "demo", build = "tfdemo" }
