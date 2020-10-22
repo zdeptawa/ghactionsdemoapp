@@ -5,6 +5,7 @@
 
 # IMPORTANT: Make sure subscription_id, client_id, client_secret, and tenant_id are configured!
 
+# Setup for Terraform Cloud for backend and workspace
 terraform {
   required_providers {
     azurerm = {
